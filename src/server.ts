@@ -26,33 +26,51 @@ const client = new Client(dbConfig);
 client.connect();
 
 
-const fetchPokemon = async () => {
-  console.log("fetching pokemon data")
-  let urls = await fetchUrls()
-  const promises = [];
-  for (let url of urls){
-        promises.push(axios.get(url))
+const updateDatabase = async (allPokemon: pokemonDatabaseInterface[]) => {
+  const updatePokedex = 'INSERT INTO pokemon (id, name, height, weight, location_url, base_experience, type) VALUES ($1, $2, $3, $4, $5, $6, $7) ON CONFLICT (id) DO UPDATE SET name = excluded.name, height = excluded.height, weight = excluded.weight, location_url = excluded.location_url, base_experience = excluded.base_experience, type = excluded.type returning *'
+  for (let pokemon of allPokemon){
+  const {id, name, height, weight, locationUrl, baseExperience, type} = pokemon
+  const addNewPokemon = await client.query(
+    updatePokedex, [id, name, height, weight, locationUrl, baseExperience, type]
+  );
+  console.log(addNewPokemon.rows)
   }
-  await Promise.all(promises).then((results) => {
-      const allPokemon = results.map((result) => ({
-          id: result.data.id,
-          name: result.data.name,
-          height: result.data.height,
-          weight: result.data.weight,
-          locationUrl: result.data.location_area_encounters,
-          baseExperience: result.data.base_experience,
-          type: result.data.types.map((type: typeInterface) => type.type.name).join(', ')
-      }));
-      if(!allPokemon) {
-        console.log("Error collecting pokemon")
-      } else {
-        //insert into database 
-      }
-      });
- console.log("Updated")
+}
+
+const fetchPokemon = async () => {
+    console.log("fetching pokemon data")
+    let urls = await fetchUrls()
+    const promises = [];
+    for (let url of urls){
+          promises.push(axios.get(url))
+    }
+    await Promise.all(promises).then((results) => {
+        const allPokemon = results.map((result) => ({
+            id: result.data.id,
+            name: result.data.name,
+            height: result.data.height,
+            weight: result.data.weight,
+            locationUrl: result.data.location_area_encounters,
+            baseExperience: result.data.base_experience,
+            type: result.data.types.map((type: typeInterface) => type.type.name).join(', ')
+        }));
+        if(!allPokemon) {
+          console.log("Error collecting pokemon")
+        } else {
+          updateDatabase(allPokemon);
+        }
+        });
+   console.log("Updated")
 };
 
-fetchPokemon();
+
+fetchPokemon()
+
+// Recall the function once per week
+// setInterval(fetchPokemon, 604800000)
+
+// testing to see if setInterval works as expected 
+// setInterval(fetchPokemon, 120000)
 
 
 // API info page

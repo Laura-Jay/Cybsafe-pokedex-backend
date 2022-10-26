@@ -46,7 +46,8 @@ This will set the env var LOCAL to true, which will cause the db connection conf
 
 - I understand it would be preferable to use Docker, however I do not currently have experience with docker and given the limited time constraints I have decided to use a      remote heroku database. 
 - Promise.all is a pass/fail approach to fetching all pokemon data from pokeapi, on a server that is running longterm and automatically updating this could create issues as a failed promise would close the server. 
-- 
+- If the pokeapi is sleeping fetchPokemon() fails and needs to be recalled. I feel that re-fetching the data once per week will keep the database up-to-date, however if the fetch fails then ideally it would be re-fetched instantly. 
+
 
 ## Approach to Testing 
 
