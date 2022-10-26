@@ -27,7 +27,7 @@ This will set the env var LOCAL to true, which will cause the db connection conf
 
 ### 3) As a user I can put a GET request to the server including a type and return all pokemon of that type (Complete)
 
-### 4) As a user I can put a GET request to the server including an id and return the location data of that pokemon 
+### 4) As a user I can put a GET request to the server including an id and return the location data of that pokemon (Complete)
 - Note: Checking with postman not all pokemon have location data, good test sample id's include [1, 10, 30]
 
 ### 5) As a user I can put a POST request to the server at /trainer and insert a pokemon by either name or id to a table in the database called 'caught_pokemon' 

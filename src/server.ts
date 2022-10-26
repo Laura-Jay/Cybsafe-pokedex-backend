@@ -6,6 +6,7 @@ import filePath from "./filepath"
 import axios from "axios";
 import { pokemonDatabaseInterface, PokemonInterface, typeInterface } from "./interfaces";
 import { fetchUrls } from "./utils/fetchUrls";
+import { fetchLocationData } from "./utils/fetchLocationData"
 
 
 config(); 
@@ -64,13 +65,14 @@ const fetchPokemon = async () => {
 };
 
 
-fetchPokemon()
-
-// Recall the function once per week
-// setInterval(fetchPokemon, 604800000)
+// fetchPokemon()
 
 // testing to see if setInterval works as expected 
 // setInterval(fetchPokemon, 120000)
+
+// Recall the function once per week
+setInterval(fetchPokemon, 604800000)
+
 
 
 // API info page
@@ -126,6 +128,19 @@ app.get("/pokemon/type/:type", async (req, res) => {
   }
 });
 
+//get pokemon location data by id 
+app.get("/pokemon/route/:id", async (req, res) => {
+  try {
+  const id = req.params.id
+  const dbres = await client.query("select location_url from pokemon where location_url LIKE '%' || '/' || $1 || '/encounters'", [id]);
+  const url : string = dbres.rows[0].location_url
+  const results = await fetchLocationData(url);
+  res.status(200).json(results);
+  } catch(error) {
+    res.status(400)
+    console.error(error)
+  }
+});
 
 
 //Start the server on the given port
