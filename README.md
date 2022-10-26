@@ -22,7 +22,7 @@ This will set the env var LOCAL to true, which will cause the db connection conf
 - Pokemon should be ordered by ID 
 - I should see a pokemon's ID, name and 5 other characteristics 
 
-### 2) As a user I can put a GET request to the server including an id or name and return that specific pokemon
+### 2) As a user I can put a GET request to the server including an id or name and return that specific pokemon (Complete)
 - Name should return regardless of case used 
 
 ### 3) As a user I can put a GET request to the server including a type and return all pokemon of that type

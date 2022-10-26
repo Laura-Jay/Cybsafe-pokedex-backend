@@ -90,6 +90,30 @@ app.get("/pokemon", async (req, res) => {
   }
 });
 
+//get pokemon by name
+app.get("/pokemon/name/:name", async (req, res) => {
+  try {
+  const name = req.params.name.toLowerCase()  
+  const dbres = await client.query('select * from pokemon where name = $1', [name]);
+  res.status(200).json(dbres.rows[0]);
+  } catch(error) {
+    res.status(400)
+    console.error(error)
+  }
+});
+
+//get pokemon by id
+app.get("/pokemon/id/:id", async (req, res) => {
+  try {
+  const id = req.params.id  
+  const dbres = await client.query('select * from pokemon where id = $1', [id]);
+  res.status(200).json(dbres.rows[0]);
+  } catch(error) {
+    res.status(400)
+    console.error(error)
+  }
+});
+
 
 
 //Start the server on the given port
