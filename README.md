@@ -13,7 +13,7 @@ This will set the env var LOCAL to true, which will cause the db connection conf
 
 ## User Stories
 
-### 1) As a user I can put a GET request to the server and return all pokemon within the database
+### 1) As a user I can put a GET request to the server and return all pokemon within the database (Complete)
 - If the pokeapi is updated I should receive an up to date list of the pokemon 
 
         - Refresh page once per week using setInterval to call the fetch function

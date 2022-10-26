@@ -79,6 +79,18 @@ app.get("/", (req, res) => {
   res.sendFile(pathToFile);
 });
 
+//get all pokemon
+app.get("/pokemon", async (req, res) => {
+  try {
+  const dbres = await client.query('select * from pokemon ORDER BY id');
+  res.status(200).json(dbres.rows);
+  } catch(error) {
+    res.status(400)
+    console.error(error)
+  }
+});
+
+
 
 //Start the server on the given port
 const port = process.env.PORT;
