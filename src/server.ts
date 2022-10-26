@@ -92,6 +92,29 @@ app.get("/pokemon", async (req, res) => {
   }
 });
 
+//get all pokemon ordered by weight 
+app.get("/pokemon/weight", async (req, res) => {
+  try {
+  const dbres = await client.query('select * from pokemon ORDER BY weight');
+  res.status(200).json(dbres.rows);
+  } catch(error) {
+    res.status(400)
+    console.error(error)
+  }
+});
+
+//get all pokemon ordered by height
+app.get("/pokemon/height", async (req, res) => {
+  try {
+  const dbres = await client.query('select * from pokemon ORDER BY height');
+  res.status(200).json(dbres.rows);
+  } catch(error) {
+    res.status(400)
+    console.error(error)
+  }
+});
+
+
 //get pokemon by name
 app.get("/pokemon/name/:name", async (req, res) => {
   try {
