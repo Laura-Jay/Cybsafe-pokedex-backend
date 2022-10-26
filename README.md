@@ -1,23 +1,9 @@
-# mark-fullstack-proj--starter-1
-
-## Usage:
-
-Instead of cloning this project, click "Use this template".  This will allow you to create a repo on github which has this project's content but which is not a fork of it.
-
-Make sure you create the repo as being owned by your own account not by the WeAreAcademy organisation.
-
+# Pokedex Project 
 
 ## Install
 
 `yarn`
 
-## DB Setup
-
-Copy .env.example to .env and set `DATABASE_URL` and `PORT` to your liking.
-
-Example for a local database: `DATABASE_URL=postgres://neill@localhost/pastebin`
-
-You will need to create your own databases for this project - one locally and one on Heroku.
 
 ## Running locally
 
@@ -25,6 +11,40 @@ You will need to create your own databases for this project - one locally and on
 
 This will set the env var LOCAL to true, which will cause the db connection configuration to NOT use SSL (appropriate for your local db)
 
-## running on heroku
+## User Stories
 
-When the project is deployed to heroku, the command in your `Procfile` file will be run.
+### 1) As a user I can put a GET request to the server and return all pokemon within the database
+- If the pokeapi is updated I should receive an up to date list of the pokemon 
+
+        - Refresh page once per week using setInterval to call the fetch function
+        - Where an id exists update the info, where it does not exist insert into database
+
+- Pokemon should be ordered by ID 
+- I should see a pokemon's ID, name and 5 other characteristics 
+
+### 2) As a user I can put a GET request to the server including an id or name and return that specific pokemon
+- Name should return regardless of case used 
+
+### 3) As a user I can put a GET request to the server including a type and return all pokemon of that type
+
+### 4) As a user I can put a GET request to the server including an id and return the location data of that pokemon 
+- Note: Checking with postman not all pokemon have location data, good test sample id's include [1, 10, 30]
+
+### 5) As a user I can put a POST request to the server at /trainer and insert a pokemon by either name or id to a table in the database called 'caught_pokemon' 
+        - On entering the caught_pokemon table pokemon are given an additonal fields: 'level', starting at 5 and 'nickname' which must be specified in the post request.
+        - I can put a GET request to the server at /trainer/:nickname/battle
+        - If there is a pokemon with this nickname in the caught_pokemon table then a battlePokemon(pokemon) function is run 
+                - The battlePokemon() function increments the pokemon.level by 1
+                - As a user my GET request returns the pokemon object to me and I can see that my pokemon has levelled up. 
+                - As a user my GET request returns a message: "One day you'll be the very best, keep training!" 
+        - If there is no pokemon with this nickname my GET request returns a message: "No such pokemon on the PC, you gotta' catch em all!" 
+
+### 6) As a user I can put a DELETE request to the server at /trainer/release/:nickname and the corresponding pokemon row in the 'caught_pokemon' table is dropped. 
+        - I get a response including the pokemon object that has just been dropped and a message: "Some pokemon just don't belong in Pokeballs" 
+
+## Assumptions / Issues / Improvements / Lessons Learnt 
+
+
+## Approach to Testing 
+
+- Jest Tests
