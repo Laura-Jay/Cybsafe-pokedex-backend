@@ -1,4 +1,4 @@
-# Pokedex Project 
+ # Pokedex Project 
 
 ## Deployed Backend 
 
@@ -13,7 +13,6 @@ https://pokedex-backend-lj.herokuapp.com/
 
 `yarn start:dev`
 
-This will set the env var LOCAL to true, which will cause the db connection configuration to NOT use SSL (appropriate for your local db)
 
 ## User Stories
 
