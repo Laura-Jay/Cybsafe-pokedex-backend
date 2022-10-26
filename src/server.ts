@@ -114,6 +114,18 @@ app.get("/pokemon/id/:id", async (req, res) => {
   }
 });
 
+//get pokemon by type 
+app.get("/pokemon/type/:type", async (req, res) => {
+  try {
+  const type = req.params.type
+  const dbres = await client.query("select * from pokemon where type LIKE '%' || $1 || '%' ORDER BY name", [type]);
+  res.status(200).json(dbres.rows);
+  } catch(error) {
+    res.status(400)
+    console.error(error)
+  }
+});
+
 
 
 //Start the server on the given port
