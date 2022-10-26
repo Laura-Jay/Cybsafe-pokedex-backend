@@ -64,8 +64,10 @@ const fetchPokemon = async () => {
    console.log("Updated")
 };
 
-
-// fetchPokemon()
+let initial = true; 
+if (initial){
+  fetchPokemon()
+}
 
 // testing to see if setInterval works as expected 
 // setInterval(fetchPokemon, 120000)
