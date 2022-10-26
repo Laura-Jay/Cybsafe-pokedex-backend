@@ -1,5 +1,9 @@
 # Pokedex Project 
 
+## Deployed Backend 
+
+https://pokedex-backend-lj.herokuapp.com/
+
 ## Install
 
 `yarn`
