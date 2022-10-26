@@ -165,6 +165,79 @@ app.get("/pokemon/route/:id", async (req, res) => {
   }
 });
 
+app.get("/adventure", (req, res) => {
+  res.json({
+    location: "Pallet Town",
+    speech: {
+      speaker: "Proffessor Oak",
+      text: "Welcome, young pokemon adventurer. If you are ready to start your journey select your starter pokemon.",
+    },
+    options: {
+      Bulbasaur: "/adventure/bulbasaur",
+      Charmander: "/adventure/charmander",
+      Squirtle: "/adventure/squirtle",
+    },
+  })
+});
+
+//Should be able to pull the pokemon from the api and then insert into a new adventure table depending on choice.
+app.get("/adventure/bulbasaur", (req, res) => {
+  res.json({
+    location: "Pallet Town",
+    speech: {
+      speaker: "Proffessor Oak",
+      text: "An excellent choice. Grass type pokemon are strong against water types and weak against fire types. Now off with you into the long grass, and whatever you do don't let me catch you riding your bike indoors!",
+    },
+    options: {
+      Begin: "/adventure/1",
+    },
+  })
+});
+
+app.get("/adventure/charmander", (req, res) => {
+  res.json({
+    location: "Pallet Town",
+    speech: {
+      speaker: "Proffessor Oak",
+      text: "An excellent choice. Fire type pokemon are strong against grass types and weak against water types. Now off with you into the long grass, and whatever you do don't let me catch you riding your bike indoors!",
+    },
+    options: {
+      Begin: "/adventure/1",
+    },
+  })
+});
+
+app.get("/adventure/squirtle", (req, res) => {
+  res.json({
+    location: "Pallet Town",
+    speech: {
+      speaker: "Proffessor Oak",
+      text: "An excellent choice. Water type pokemon are strong against fire types and weak against grass types. Now off with you into the long grass, and whatever you do don't let me catch you riding your bike indoors!",
+    },
+    options: {
+      Begin: "/adventure/1",
+    },
+  })
+});
+
+app.get("/adventure/1", (req, res) => {
+  res.json({
+    location: "Route 1",
+    speech: {
+      speaker: "Rich Trainer Elon",
+      text: "My tech start up has given me all the data I need to beat you in the battle, lets fight!.",
+      pokemon: "A level 2 pidgey appears."
+    },
+    options: {
+      Battle: "/adventure/1/fight",
+    },
+  })
+});
+
+//For simplicity and story driven narrative assume all battles are won, or loosing is intentional and drives the plot" 
+
+//At certain narrative points the pokemon should evolve, deleting the existing pokemon from the adventure database and replacing with its evolved version. 
+
 
 //Start the server on the given port
 const port = process.env.PORT;
