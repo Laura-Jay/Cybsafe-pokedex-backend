@@ -47,7 +47,18 @@ This will set the env var LOCAL to true, which will cause the db connection conf
 - I understand it would be preferable to use Docker, however I do not currently have experience with docker and given the limited time constraints I have decided to use a      remote heroku database. 
 - Promise.all is a pass/fail approach to fetching all pokemon data from pokeapi, on a server that is running longterm and automatically updating this could create issues as a failed promise would close the server. 
 - If the pokeapi is sleeping fetchPokemon() fails and needs to be recalled. I feel that re-fetching the data once per week will keep the database up-to-date, however if the fetch fails then ideally it would be re-fetched instantly. 
-- 
+- I did not have time to implement user story 5 or my jest tests. If I had more time I would really like to go further with the caught pokemon idea, and develop it in the style of a tamagotchi. 
+    Further ideas: 
+    - Add a route to feed your pokemon berries and improve their stats 
+    - Add a front end and include pokemon sprites 
+    - Add an additional table for moves linked to pokemon table via a foreign key 
+    - Add an endpoint adventure system. For exammple going to "/adventure/pallettown" allows you to pick your choice of starter pokemon. Then you can progress through the routes on your pokemon journey in a modern interpretation of a choose your own adventure style book. When battling a gym, knowing to choose an effective typing i.e "/gym/lavendertown/normal" would send the response message "You wiped out - See Nurse Joy" because Ghost types aren't effected by normal moves. 
+- I really enjoyed this project. I have never built a crawler before and it gave me some opportunity to think about how I would approach the problem whilst also providing room for creativity. I intend to take this project forward and make it into a full stack app in my spare time as the nostalgia of it really got me inspired. 
+- I spent 2 hours on the actual app, there is a little extra time which was taken to make reflections, set up the app as I did not use your boilerplate and host the database remotely on heroku. 
+
+Thank you for the opportunity, any feedback on my appraoch is greatly appreciated. 
+
+Laura - Jay 
 
 
 
