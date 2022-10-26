@@ -44,7 +44,11 @@ This will set the env var LOCAL to true, which will cause the db connection conf
 
 ## Assumptions / Issues / Improvements / Lessons Learnt 
 
+- I understand it would be preferable to use Docker, however I do not currently have experience with docker and given the limited time constraints I have decided to use a      remote heroku database. 
+- Promise.all is a pass/fail approach to fetching all pokemon data from pokeapi, on a server that is running longterm and automatically updating this could create issues as a failed promise would close the server. 
+- 
 
 ## Approach to Testing 
 
-- Jest Tests
+- fetchUrls.test.ts (helper function unit jest test)
+- 

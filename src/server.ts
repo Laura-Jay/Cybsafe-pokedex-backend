@@ -4,6 +4,9 @@ import express from "express";
 import cors from "cors";
 import filePath from "./filepath"
 import axios from "axios";
+import { pokemonDatabaseInterface, PokemonInterface, typeInterface } from "./interfaces";
+import { fetchUrls } from "./utils/fetchUrls";
+
 
 config(); 
 
@@ -22,8 +25,34 @@ app.use(cors())
 const client = new Client(dbConfig);
 client.connect();
 
-const baseUrl = "https://pokeapi.co/api/v2/"
 
+const fetchPokemon = async () => {
+  console.log("fetching pokemon data")
+  let urls = await fetchUrls()
+  const promises = [];
+  for (let url of urls){
+        promises.push(axios.get(url))
+  }
+  await Promise.all(promises).then((results) => {
+      const allPokemon = results.map((result) => ({
+          id: result.data.id,
+          name: result.data.name,
+          height: result.data.height,
+          weight: result.data.weight,
+          locationUrl: result.data.location_area_encounters,
+          baseExperience: result.data.base_experience,
+          type: result.data.types.map((type: typeInterface) => type.type.name).join(', ')
+      }));
+      if(!allPokemon) {
+        console.log("Error collecting pokemon")
+      } else {
+        //insert into database 
+      }
+      });
+ console.log("Updated")
+};
+
+fetchPokemon();
 
 
 // API info page
